@@ -1,7 +1,19 @@
 @import '../../styles/';
 
 .header {
-  &__text {
+  @include stack(L);
+  padding: #{map-get($spacing, S)}px;
+
+  @include mq(M) {
+    padding: #{map-get($spacing, S)}px 0;
+  }
+
+  &__headline {
     @include typography(headline);
+  }
+
+  &__subheadline {
+    @include typography(subheadline);
+    color: $grey;
   }
 }

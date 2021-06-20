@@ -53,10 +53,8 @@ a:hover {
   color: #555;
 }
 
-// https://type-scale.com/ generated base type rules ----------
-
 p {
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 h1,
@@ -64,7 +62,7 @@ h2,
 h3,
 h4,
 h5 {
-  margin: 3rem 0 1.38rem;
+  margin: 0;
 }
 
 h1 {
