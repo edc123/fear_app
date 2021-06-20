@@ -13,10 +13,10 @@ const App = () => {
   }, [data])
 
   return (
-    <>
+    <div className="app">
       <Header />
       <Accordion />
-    </>
+    </div>
   )
 }
 
