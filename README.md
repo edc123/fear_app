@@ -4,6 +4,10 @@ _Fear is all we have now in South Australia._
 
 Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Important note about CORS
+
+It's not enabled on the data.sa.gov endpoint so you'll need to install a CORS plugin to see results. Probably just need a key.
+
 ## Available Scripts
 
 In the project directory, you can run:
