@@ -1,0 +1,25 @@
+$spacing: (
+  XXS: 8,
+  XS: 12,
+  S: 16,
+  M: 24,
+  L: 40,
+  XL: 60,
+  XXL: 70,
+);
+
+@mixin stack($size) {
+  $value: map-get($spacing, $size);
+
+  @if $value {
+    margin-bottom: #{$value}px;
+  }
+}
+
+@mixin inline($size) {
+  $value: map-get($spacing, $size);
+
+  @if $value {
+    margin-right: #{$value}px;
+  }
+}

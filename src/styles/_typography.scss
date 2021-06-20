@@ -1,0 +1,42 @@
+$styles: (
+  headline: (
+    XXS: (
+      font-size: 4.209rem,
+      font-weight: 400,
+      line-height: 1.3,
+    ),
+  ),
+  body: (
+    XXS: (
+      font-size: 1rem,
+      font-weight: 400,
+      line-height: 1.75,
+    ),
+  ),
+);
+
+@mixin get-styles($breakpoint-style) {
+  $font-size: map-get($breakpoint-style, font-size);
+  $font-weight: map-get($breakpoint-style, font-weight);
+  $line-height: map-get($breakpoint-style, line-height);
+
+  font: {
+    size: $font-size;
+    weight: $font-weight;
+  }
+  line-height: $line-height;
+}
+
+@mixin typography($style) {
+  $value: map-get($styles, $style);
+
+  @each $breakpoint, $breakpoint-style in $value {
+    @if $breakpoint == XXS {
+      @include get-styles($breakpoint-style);
+    } @else {
+      @include mq($breakpoint) {
+        @include get-styles($breakpoint-style);
+      }
+    }
+  }
+}
