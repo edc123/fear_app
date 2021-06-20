@@ -27,7 +27,7 @@ const useOffences = () => {
   const { data, error } = useSWR<OffencesResponse>(OFFENCES_ENDPOINT, request)
 
   return {
-    data: data?.result?.records ?? {},
+    data: data?.result?.records ?? null,
     isLoading: !error && !data,
     isError: error,
   }
