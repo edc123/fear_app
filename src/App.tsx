@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Accordion } from './components'
 
-function App() {
+const App = () => {
   return (
     <div className="app">
       <header className="header">
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
