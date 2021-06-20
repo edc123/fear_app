@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
-import './App.scss'
 
-import { Accordion } from './components'
+import { Accordion, Header } from './components'
 import { useOffences } from './utils'
 
 const App = () => {
@@ -14,10 +13,10 @@ const App = () => {
   }, [data])
 
   return (
-    <div className="app">
-      <header className="header">Fēar</header>
+    <>
+      <Header />
       <Accordion />
-    </div>
+    </>
   )
 }
 

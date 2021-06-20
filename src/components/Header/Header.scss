@@ -1,0 +1,7 @@
+@import '../../styles/';
+
+.header {
+  &__text {
+    @include typography(headline);
+  }
+}
