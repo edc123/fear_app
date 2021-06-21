@@ -1,11 +1,8 @@
 import useSWR from 'swr'
 
-import { request } from './fetch'
+import { request } from '../fetch'
 
-const OFFENCES_ENDPOINT =
-  'https://data.sa.gov.au/data/api/3/action/datastore_search?resource_id=590083cd-be2f-4a6c-871e-0ec4c717717b'
-
-type OffenceRecord = {
+export type OffenceRecord = {
   'Offence Level 1 Description'?: string
   'Offence Level 2 Description'?: string
   'Offence Level 3 Description'?: string
@@ -16,21 +13,56 @@ type OffenceRecord = {
   _id?: number
 }
 
-type OffencesResponse = {
+export type OffencesResponse = {
   result: {
     records: OffenceRecord[]
     // etc...
   }
 }
 
-const useOffences = () => {
-  const { data, error } = useSWR<OffencesResponse>(OFFENCES_ENDPOINT, request)
+export type OffencesError = {
+  result: 'Failed'
+}
+
+const OFFENCES_ENDPOINT =
+  'https://data.sa.gov.au/data/api/3/action/datastore_search?resource_id=590083cd-be2f-4a6c-871e-0ec4c717717b'
+
+const groupItems = (items: OffenceRecord[], groupBy: keyof OffenceRecord) =>
+  items.reduce((acc, item) => {
+    const currValue = item[groupBy] ?? 'Not defined'
+    const hasKey = acc.hasOwnProperty(currValue)
+
+    if (!hasKey) {
+      acc[currValue] = [item]
+    } else {
+      acc[currValue].push(item)
+    }
+
+    return acc
+  }, {} as Record<any, OffenceRecord[]>)
+
+const useOffences = ({ groupBy }: { groupBy: keyof OffenceRecord }) => {
+  const { data, error } = useSWR<OffencesResponse, OffencesError>(
+    OFFENCES_ENDPOINT,
+    request,
+    {
+      revalidateOnFocus: false,
+    },
+  )
+
+  const records = data?.result?.records ?? []
+
+  const processedData = records.length > 0 ? groupItems(records, groupBy) : {}
+
+  const isError = error?.result === 'Failed'
+
+  const isLoading = !isError && !data
 
   return {
-    data: data?.result?.records ?? null,
-    isLoading: !error && !data,
-    isError: error,
+    data: processedData,
+    isLoading,
+    isError,
   }
 }
 
-export { useOffences }
+export { useOffences, groupItems }
