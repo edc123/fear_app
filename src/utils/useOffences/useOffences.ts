@@ -39,7 +39,7 @@ const groupItems = (items: OffenceRecord[], groupBy: keyof OffenceRecord) =>
     }
 
     return acc
-  }, {} as Record<any, OffenceRecord[]>)
+  }, {} as Record<string, OffenceRecord[]>)
 
 const useOffences = ({ groupBy }: { groupBy: keyof OffenceRecord }) => {
   const { data, error } = useSWR<OffencesResponse, OffencesError>(

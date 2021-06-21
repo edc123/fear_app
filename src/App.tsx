@@ -1,21 +1,22 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 
 import { Accordion, Header } from './components'
 import { useOffences } from './utils'
 
-const App = () => {
-  const { data } = useOffences()
+import { OffenceRecord } from './utils/useOffences/useOffences'
 
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-    }
-  }, [data])
+const App = () => {
+  const [groupBy, setGroupBy] =
+    useState<keyof OffenceRecord>('Suburb - Incident')
+
+  const { data, isLoading, isError } = useOffences({ groupBy })
 
   return (
     <div className="app">
       <Header />
-      <Accordion />
+
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>There was an error.</p>}
     </div>
   )
 }

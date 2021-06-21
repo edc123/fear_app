@@ -1,1 +1,1 @@
-export { useOffences } from './useOffences'
+export { useOffences, groupItems } from './useOffences/useOffences'

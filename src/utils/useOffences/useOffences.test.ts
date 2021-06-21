@@ -1,4 +1,4 @@
-import { groupItems } from '../useOffences'
+import { groupItems } from './useOffences'
 
 import { mock, mock2, mockResult, mockResult2 } from './useOffences.mock'
 
