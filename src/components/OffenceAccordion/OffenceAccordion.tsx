@@ -2,6 +2,7 @@ import cx from 'classnames'
 import { Dispatch, SetStateAction } from 'react'
 
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel } from '../'
+import './OffenceAccordion.scss'
 
 import { OffenceRecord } from '../../utils/useOffences/useOffences'
 
