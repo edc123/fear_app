@@ -22,12 +22,14 @@ const App = () => {
 
   const { data, isLoading, isError } = useOffences({ groupBy })
 
-  const handleFilterToggle = () =>
+  const handleFilterToggle = () => {
+    setSelectedPanel(null)
     setGroupBy(
       groupBy === 'Suburb - Incident'
         ? 'Offence Level 2 Description'
         : 'Suburb - Incident',
     )
+  }
 
   return (
     <div className="app">
