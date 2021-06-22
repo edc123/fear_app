@@ -1,0 +1,9 @@
+@import '../../styles/';
+
+.status {
+  margin: 5px 15px;
+
+  @include mq(M) {
+    margin: 0;
+  }
+}

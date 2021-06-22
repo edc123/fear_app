@@ -1,0 +1,25 @@
+@import '../../styles/';
+
+.filter {
+  @include stack(XS);
+  padding: 0 15px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include mq(M) {
+    flex-direction: row;
+    padding: 0;
+  }
+
+  &__button {
+    @include typography(body);
+    border: none;
+    background-color: $dark-grey;
+    color: $white;
+    cursor: pointer;
+    padding: 0 8px;
+    border-radius: 6px;
+  }
+}

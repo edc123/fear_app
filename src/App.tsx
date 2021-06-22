@@ -6,6 +6,9 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
+  Filter,
+  Header,
+  Status,
 } from './components'
 import { useOffences } from './utils'
 
@@ -17,12 +20,21 @@ const App = () => {
 
   const { data, isLoading, isError } = useOffences({ groupBy })
 
+  const handleFilterToggle = () =>
+    setGroupBy(
+      groupBy === 'Suburb - Incident'
+        ? 'Offence Level 2 Description'
+        : 'Suburb - Incident',
+    )
+
   return (
     <div className="app">
       <Header />
 
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>There was an error.</p>}
+      <Status>
+        {isLoading && <p>Loading...</p>}
+        {isError && <p>There was an error.</p>}
+      </Status>
 
       {Object.keys(data).length > 0 && (
         <>
