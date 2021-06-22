@@ -97,7 +97,8 @@ h5 {
   }
 
   &__level-3 {
-    font-weight: 700;
+    @include typography(subheadline-reduced-bold);
+    @include stack(XXS);
   }
 
   &__suburb {
