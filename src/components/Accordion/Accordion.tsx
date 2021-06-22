@@ -1,5 +1,3 @@
-import React, { forwardRef } from 'react'
-
 import { Blip } from '../'
 
 import './Accordion.scss'
@@ -27,20 +25,22 @@ const AccordionButton: React.FC<AccordionButtonProps> = ({
   groupName,
   isExpanded,
   handleClick,
-}) => (
-  <h3>
-    <button
-      className="accordion__button"
-      type="button"
-      onClick={handleClick}
-      aria-expanded={isExpanded}
-      aria-controls={`panel_${groupName}`}
-      id={`button_${groupName}`}>
-      {isExpanded && <Blip />}
-      <div>{children}</div>
-    </button>
-  </h3>
-)
+}) => {
+  return (
+    <h3>
+      <button
+        className="accordion__button"
+        type="button"
+        onClick={handleClick}
+        aria-expanded={isExpanded}
+        aria-controls={`panel_${groupName}`}
+        id={`button_${groupName}`}>
+        {isExpanded && <Blip />}
+        <div>{children}</div>
+      </button>
+    </h3>
+  )
+}
 
 const AccordionPanel: React.FC<AccordionPanelProps> = ({
   children,
