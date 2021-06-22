@@ -10,7 +10,7 @@ export type OffenceRecord = {
   'Postcode - Incident'?: string
   'Reported Date'?: string
   'Suburb - Incident'?: string
-  _id?: number
+  _id: number
 }
 
 export type OffencesResponse = {
@@ -42,7 +42,7 @@ const groupItems = (items: OffenceRecord[], groupBy: keyof OffenceRecord) =>
   }, {} as Record<string, OffenceRecord[]>)
 
 const useOffences = ({ groupBy }: { groupBy: keyof OffenceRecord }) => {
-  const { data, error } = useSWR<OffencesResponse, OffencesError>(
+  const { data, error, isValidating } = useSWR<OffencesResponse, OffencesError>(
     OFFENCES_ENDPOINT,
     request,
     {
@@ -54,9 +54,9 @@ const useOffences = ({ groupBy }: { groupBy: keyof OffenceRecord }) => {
 
   const processedData = records.length > 0 ? groupItems(records, groupBy) : {}
 
-  const isError = error?.result === 'Failed'
+  const isError = (!isValidating && !data) || error?.result === 'Failed'
 
-  const isLoading = !isError && !data
+  const isLoading = isValidating && !isError
 
   return {
     data: processedData,
