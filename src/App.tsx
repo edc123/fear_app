@@ -31,6 +31,14 @@ const App = () => {
     )
   }
 
+  const handleAccordionButtonToggle = (isExpanded: boolean, i: number) => {
+    if (isExpanded) {
+      setSelectedPanel(null)
+    } else {
+      setSelectedPanel(i)
+    }
+  }
+
   return (
     <div className="app">
       <Header />
@@ -54,13 +62,9 @@ const App = () => {
                     key={`button_${key}`}
                     groupName={key}
                     isExpanded={isExpanded}
-                    handleClick={() => {
-                      if (isExpanded) {
-                        setSelectedPanel(null)
-                      } else {
-                        setSelectedPanel(i)
-                      }
-                    }}>
+                    handleClick={() =>
+                      handleAccordionButtonToggle(isExpanded, i)
+                    }>
                     {key} <span aria-hidden="true">({records.length})</span>
                     <span className="visually-hidden">
                       , number of records: {records.length}
