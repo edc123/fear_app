@@ -38,64 +38,73 @@ const App = () => {
         {isError && <p>There was an error.</p>}
       </Status>
 
-      {Object.keys(data).length > 0 && (
+      {!isLoading && !isError && Object.keys(data).length > 0 && (
         <>
           <Filter handleClick={handleFilterToggle}>{groupBy}</Filter>
 
           <Accordion>
-            {Object.entries(data).map(([key, records], i) => (
-              <AccordionItem key={`item_${key}`}>
-                <AccordionButton
-                  key={`button_${key}`}
-                  groupName={key}
-                  isExpanded={i === selectedPanel}
-                  handleClick={() => {
-                    if (i === selectedPanel) {
-                      setSelectedPanel(null)
-                    } else {
-                      setSelectedPanel(i)
-                    }
-                  }}>
-                  {key} ({records.length})
-                </AccordionButton>
+            {Object.entries(data).map(([key, records], i) => {
+              const isExpanded = i === selectedPanel
 
-                {i === selectedPanel && (
-                  <AccordionPanel key={`panel_${key}`} groupName={key}>
-                    {records?.map((record, i) => (
-                      <div
-                        className={cx('offence', {
-                          'offence--last': i === records?.length - 1,
-                        })}
-                        key={record?._id}>
-                        <h4 className="offence__level-3">
-                          {record?.['Offence Level 3 Description']}
-                        </h4>
+              return (
+                <AccordionItem key={`item_${key}`}>
+                  <AccordionButton
+                    key={`button_${key}`}
+                    groupName={key}
+                    isExpanded={isExpanded}
+                    handleClick={() => {
+                      if (isExpanded) {
+                        setSelectedPanel(null)
+                      } else {
+                        setSelectedPanel(i)
+                      }
+                    }}>
+                    {key} <span aria-hidden="true">({records.length})</span>
+                    <span className="visually-hidden">
+                      , number of records: {records.length}
+                    </span>
+                  </AccordionButton>
 
-                        <div className="offence__level-1">
-                          {record?.['Offence Level 1 Description']}
-                        </div>
+                  {isExpanded && (
+                    <AccordionPanel key={`panel_${key}`} groupName={key}>
+                      <ul className="offences__wrapper">
+                        {records?.map((record, i) => (
+                          <li
+                            className={cx('offence', {
+                              'offence--last': i === records?.length - 1,
+                            })}
+                            key={record?._id}>
+                            <h4 className="offence__level-3">
+                              {record?.['Offence Level 3 Description']}
+                            </h4>
 
-                        {groupBy === 'Suburb - Incident' && (
-                          <div className="offence__level-2">
-                            {record?.['Offence Level 2 Description']}
-                          </div>
-                        )}
+                            <div className="offence__level-1">
+                              {record?.['Offence Level 1 Description']}
+                            </div>
 
-                        {groupBy === 'Offence Level 2 Description' && (
-                          <div className="offence__suburb">
-                            {record?.['Suburb - Incident']}
-                          </div>
-                        )}
+                            {groupBy === 'Suburb - Incident' && (
+                              <div className="offence__level-2">
+                                {record?.['Offence Level 2 Description']}
+                              </div>
+                            )}
 
-                        <div className="offence__date">
-                          {record?.['Reported Date']}
-                        </div>
-                      </div>
-                    ))}
-                  </AccordionPanel>
-                )}
-              </AccordionItem>
-            ))}
+                            {groupBy === 'Offence Level 2 Description' && (
+                              <div className="offence__suburb">
+                                {record?.['Suburb - Incident']}
+                              </div>
+                            )}
+
+                            <div className="offence__date">
+                              {record?.['Reported Date']}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionPanel>
+                  )}
+                </AccordionItem>
+              )
+            })}
           </Accordion>
         </>
       )}

@@ -76,6 +76,12 @@ h5 {
 }
 
 // Ideally this would sit somewhere else
+.offences__wrapper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .offence {
   @include stack(S);
   border-bottom: 1px solid #2b181c;
