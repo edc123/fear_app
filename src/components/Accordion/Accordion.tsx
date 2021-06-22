@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { forwardRef } from 'react'
 
 import { Blip } from '../'
 
@@ -6,6 +6,8 @@ import './Accordion.scss'
 
 type AccordionButtonProps = {
   groupName: string
+  isExpanded: boolean
+  handleClick: () => void
 }
 
 type AccordionPanelProps = {
@@ -23,15 +25,18 @@ const AccordionItem: React.FC = ({ children }) => (
 const AccordionButton: React.FC<AccordionButtonProps> = ({
   children,
   groupName,
+  isExpanded,
+  handleClick,
 }) => (
   <h3>
     <button
       className="accordion__button"
       type="button"
-      aria-expanded="false"
+      onClick={handleClick}
+      aria-expanded={isExpanded}
       aria-controls={`panel_${groupName}`}
       id={`button_${groupName}`}>
-      <Blip />
+      {isExpanded && <Blip />}
       <div>{children}</div>
     </button>
   </h3>
@@ -50,12 +55,8 @@ const AccordionPanel: React.FC<AccordionPanelProps> = ({
   </div>
 )
 
-const Accordion: React.FC<AccordionProps> = ({ children }) => {
-  useEffect(() => {
-    // bind some arrow actions
-  }, [])
-
-  return <div className="accordion">{children}</div>
-}
+const Accordion: React.FC<AccordionProps> = ({ children }) => (
+  <div className="accordion">{children}</div>
+)
 
 export { Accordion, AccordionItem, AccordionButton, AccordionPanel }
