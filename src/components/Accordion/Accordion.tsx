@@ -32,7 +32,7 @@ const AccordionButton: React.FC<AccordionButtonProps> = ({
       aria-controls={`panel_${groupName}`}
       id={`button_${groupName}`}>
       <Blip />
-      <span>{children}</span>
+      <div>{children}</div>
     </button>
   </h3>
 )

@@ -4,17 +4,15 @@
   @include stack(XL);
 
   &__button {
-    @include typography(body);
+    @include typography(subheadline-reduced-bold);
     display: flex;
-    align-self: center;
     align-items: center;
     border: none;
     background-color: transparent;
     color: $red;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     padding: 5px 15px;
-    width: 100%;
 
     @include mq(M) {
       padding: 5px 0;
