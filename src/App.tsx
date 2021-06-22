@@ -31,8 +31,18 @@ const App = () => {
     )
   }
 
-  const handleAccordionButtonToggle = (isExpanded: boolean, i: number) =>
+  const handleAccordionButtonToggle = (
+    isExpanded: boolean,
+    i: number,
+    key: string,
+  ) => {
+    document.querySelector(`[id="button_${key}"]`)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
+
     setSelectedPanel(isExpanded ? null : i)
+  }
 
   return (
     <div className="app">
@@ -59,7 +69,7 @@ const App = () => {
                     isExpanded={isExpanded}
                     selectedPanel={selectedPanel}
                     handleClick={() =>
-                      handleAccordionButtonToggle(isExpanded, i)
+                      handleAccordionButtonToggle(isExpanded, i, key)
                     }>
                     {key} <span aria-hidden="true">({records.length})</span>
                     <span className="visually-hidden">
