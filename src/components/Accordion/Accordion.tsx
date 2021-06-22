@@ -1,3 +1,5 @@
+import cx from 'classnames'
+
 import { Blip } from '../'
 
 import './Accordion.scss'
@@ -6,6 +8,7 @@ type AccordionButtonProps = {
   groupName: string
   isExpanded: boolean
   handleClick: () => void
+  selectedPanel: number | null
 }
 
 type AccordionPanelProps = {
@@ -25,11 +28,16 @@ const AccordionButton: React.FC<AccordionButtonProps> = ({
   groupName,
   isExpanded,
   handleClick,
+  selectedPanel,
 }) => {
+  const shouldBeDimmed = selectedPanel && !isExpanded
+
   return (
     <h3>
       <button
-        className="accordion__button"
+        className={cx('accordion__button', {
+          'accordion__button--dimmed': shouldBeDimmed,
+        })}
         type="button"
         onClick={handleClick}
         aria-expanded={isExpanded}

@@ -13,6 +13,12 @@
     text-align: left;
     cursor: pointer;
     padding: 5px 15px;
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+
+    &--dimmed {
+      opacity: 0.5;
+    }
 
     @include mq(M) {
       padding: 5px 0;

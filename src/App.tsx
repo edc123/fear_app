@@ -62,6 +62,7 @@ const App = () => {
                     key={`button_${key}`}
                     groupName={key}
                     isExpanded={isExpanded}
+                    selectedPanel={selectedPanel}
                     handleClick={() =>
                       handleAccordionButtonToggle(isExpanded, i)
                     }>
