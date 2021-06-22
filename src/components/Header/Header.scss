@@ -1,7 +1,7 @@
 @import '../../styles/';
 
 .header {
-  @include stack(L);
+  @include stack(M);
   padding: #{map-get($spacing, S)}px;
 
   @include mq(M) {
