@@ -31,13 +31,8 @@ const App = () => {
     )
   }
 
-  const handleAccordionButtonToggle = (isExpanded: boolean, i: number) => {
-    if (isExpanded) {
-      setSelectedPanel(null)
-    } else {
-      setSelectedPanel(i)
-    }
-  }
+  const handleAccordionButtonToggle = (isExpanded: boolean, i: number) =>
+    setSelectedPanel(isExpanded ? null : i)
 
   return (
     <div className="app">
