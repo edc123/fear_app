@@ -8,7 +8,7 @@
 
 .offence {
   @include stack(S);
-  border-bottom: 1px solid #2b181c;
+  border-bottom: 1px solid $dark-white;
   padding-bottom: #{map-get($spacing, S)}px;
 
   &--last {
