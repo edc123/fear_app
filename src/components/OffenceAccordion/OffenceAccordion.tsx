@@ -59,43 +59,44 @@ const OffenceAccordion: React.FC<OffenceAccordionProps> = ({
               </span>
             </AccordionButton>
 
-            {isExpanded && (
-              <AccordionPanel key={`panel_${key}`} groupName={key}>
-                <ul className="offences__wrapper">
-                  {records?.map((record, i) => (
-                    <li
-                      className={cx('offence', {
-                        'offence--last': i === records?.length - 1,
-                      })}
-                      key={record?._id}>
-                      <h4 className="offence__level-3">
-                        {record?.['Offence Level 3 Description']}
-                      </h4>
+            <AccordionPanel
+              key={`panel_${key}`}
+              groupName={key}
+              isExpanded={isExpanded}>
+              <ul className="offences__wrapper">
+                {records?.map((record, i) => (
+                  <li
+                    className={cx('offence', {
+                      'offence--last': i === records?.length - 1,
+                    })}
+                    key={record?._id}>
+                    <h4 className="offence__level-3">
+                      {record?.['Offence Level 3 Description']}
+                    </h4>
 
-                      <div className="offence__level-1">
-                        {record?.['Offence Level 1 Description']}
+                    <div className="offence__level-1">
+                      {record?.['Offence Level 1 Description']}
+                    </div>
+
+                    {groupBy === 'Suburb - Incident' && (
+                      <div className="offence__level-2">
+                        {record?.['Offence Level 2 Description']}
                       </div>
+                    )}
 
-                      {groupBy === 'Suburb - Incident' && (
-                        <div className="offence__level-2">
-                          {record?.['Offence Level 2 Description']}
-                        </div>
-                      )}
-
-                      {groupBy === 'Offence Level 2 Description' && (
-                        <div className="offence__suburb">
-                          {record?.['Suburb - Incident']}
-                        </div>
-                      )}
-
-                      <div className="offence__date">
-                        {record?.['Reported Date']}
+                    {groupBy === 'Offence Level 2 Description' && (
+                      <div className="offence__suburb">
+                        {record?.['Suburb - Incident']}
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionPanel>
-            )}
+                    )}
+
+                    <div className="offence__date">
+                      {record?.['Reported Date']}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </AccordionPanel>
           </AccordionItem>
         )
       })}

@@ -13,6 +13,7 @@ type AccordionButtonProps = {
 
 type AccordionPanelProps = {
   groupName: string
+  isExpanded: boolean
 }
 
 type AccordionProps = {
@@ -42,7 +43,8 @@ const AccordionButton: React.FC<AccordionButtonProps> = ({
         onClick={handleClick}
         aria-expanded={isExpanded}
         aria-controls={`panel_${groupName}`}
-        id={`button_${groupName}`}>
+        id={`button_${groupName}`}
+        data-testid="accordion__button">
         {isExpanded && <Blip />}
         <div>{children}</div>
       </button>
@@ -53,18 +55,24 @@ const AccordionButton: React.FC<AccordionButtonProps> = ({
 const AccordionPanel: React.FC<AccordionPanelProps> = ({
   children,
   groupName,
+  isExpanded,
 }) => (
   <div
     className="accordion__panel"
     id={`panel_${groupName}`}
     role="region"
-    aria-labelledby={`button_${groupName}`}>
+    aria-labelledby={`button_${groupName}`}
+    data-testid="accordion__panel"
+    aria-hidden={!isExpanded}
+    hidden={!isExpanded}>
     {children}
   </div>
 )
 
 const Accordion: React.FC<AccordionProps> = ({ children }) => (
-  <div className="accordion">{children}</div>
+  <div className="accordion" data-testid="accordion">
+    {children}
+  </div>
 )
 
 export { Accordion, AccordionItem, AccordionButton, AccordionPanel }
