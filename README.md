@@ -28,3 +28,4 @@ Builds the app for production to the `build` folder.
   - I would have moved types off somewhere else outside component files, and I would have maybe rejigged the folder structure a bit to be friendlier to "global" things
   - With a real project, I may have used something like `styled-components` but depends
   - Colour contrast isn't the best on the 'dimming' effect
+  - Constants / hardcoded strings could be pulled out somewhere
